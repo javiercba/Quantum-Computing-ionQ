@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-"""test_ionq, 
-   autor: javier uranga 2026
+"""test_ionq; prueba de Entrelazamiento cuantico, 
+   autor: javier uranga - abril de 2026
 """
 
 from qiskit_ionq import IonQProvider
@@ -24,8 +24,8 @@ qc.measure(qubits[0], bits[0])
 qc.measure(qubits[1], bits[1])
 
 # 4. Conexión con IonQ
-provider = IonQProvider('Api-key-ionQ')
-backend = provider.backends()[0]
+provider = IonQProvider('api-key-ionq')
+backend = provider.get_backend('ionq_simulator') #seria lo mismo hacer: backend = provider.backends()[0]
 
 # 5. Transpilación y Ejecución
 qc_ionq = transpile(qc, backend=backend, optimization_level=1)
@@ -34,4 +34,4 @@ print(f"Ejecutando {qc.name} en {backend.name}...")
 job = backend.run(qc_ionq, shots=100)
 result = job.result()
 
-print("Resultados detallados:", result.get_counts())
+print("Resultados:", result.get_counts())
