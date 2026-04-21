@@ -15,8 +15,6 @@ Para usar IonQ necesitas una API key desde su plataforma:
 
 ## Instalación de dependencias
 
-Ejecutar en tu entorno Python:
-
 ```bash
 pip install qiskit-ionq qiskit-aer
 ```
@@ -25,7 +23,7 @@ pip install qiskit-ionq qiskit-aer
 
 ## Verificar backends disponibles
 
-Conectate al provider y listá los backends disponibles (simulador y QPU):
+Conectar con IonQ y listar los backends disponibles (simulador y QPU):
 
 ```python
 from qiskit_ionq import IonQProvider
