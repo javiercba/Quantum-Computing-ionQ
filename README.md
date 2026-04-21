@@ -1,20 +1,54 @@
-Generar una api key en ionq
+# Quantum Computing con IonQ + Qiskit
 
-!pip install qiskit-ionq qiskit-aer
+Este proyecto muestra cómo conectarse a IonQ desde Qiskit, instalar dependencias
+y verificar los backends disponibles (simulador y hardware cuántico).
 
-verificar simuladores:
+---
+
+## Generar API key en IonQ
+
+Para usar IonQ necesitas una API key desde su plataforma:
+
+- https://cloud.ionq.com/
+
+---
+
+## Instalación de dependencias
+
+Ejecutar en tu entorno Python:
+
+```bash
+pip install qiskit-ionq qiskit-aer
+```
+
+---
+
+## Verificar backends disponibles
+
+Conectate al provider y listá los backends disponibles (simulador y QPU):
+
+```python
 from qiskit_ionq import IonQProvider
-provider = IonQProvider('api-key-ionq')
 
-Esto imprimirá una lista con los nombres exactos que puedes usar:
+provider = IonQProvider('tu-api-key-ionq')
 print("Backends disponibles:", provider.backends())
+```
 
-Ejemplo:
-Backends disponibles: 
+Esto imprimirá algo como:
 
-[<qiskit_ionq.ionq_backend.IonQSimulatorBackend object at 0x7fd393ecb1d0>, 
-<qiskit_ionq.ionq_backend.IonQQPUBackend object at 0x7fd393e4fc80>]
+Backends disponibles: [
+<qiskit_ionq.ionq_backend.IonQSimulatorBackend object at 0x7fd393ecb1d0>,
+<qiskit_ionq.ionq_backend.IonQQPUBackend object at 0x7fd393e4fc80>
+]
 
+Para seleccionar el simulador (primer backend), usá:
 
-seleccionar el 1er simulador disponible: 
-provider.backends()[0]
+```python
+simulator = provider.backends()[0]
+```
+
+> **Nota:** el primer elemento suele ser el simulador, pero podés filtrarlo
+> por nombre para mayor seguridad:
+> ```python
+> simulator = provider.get_backend('ionq_simulator')
+> ```
