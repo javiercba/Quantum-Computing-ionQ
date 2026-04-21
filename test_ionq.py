@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-"""test_ionq; prueba de Entrelazamiento cuantico, 
-   autor: javier uranga - abril de 2026
+"""Prueba de Entrelazamiento Cuántico en IonQ, 
+   Autor: Javier Uranga - Abril de 2026
 """
 
 from qiskit_ionq import IonQProvider
@@ -28,10 +28,13 @@ provider = IonQProvider('api-key-ionq')
 backend = provider.get_backend('ionq_simulator') #seria lo mismo hacer: backend = provider.backends()[0]
 
 # 5. Transpilación y Ejecución
+# El transpilador asigna los qubits lógicos a los físicos disponibles del backend.
+# También traduce compuertas lógicas (H, CX) a las nativas del hardware (en IonQ: GPI, GPI2, MS).
+# optimization_level=1: aplica simplificaciones básicas para reducir puertas redundantes.
 qc_ionq = transpile(qc, backend=backend, optimization_level=1)
 print(f"Ejecutando {qc.name} en {backend.name}...")
 
-job = backend.run(qc_ionq, shots=100)
+job = backend.run(qc_ionq, shots=100) #se ejecuta 100 veces
 result = job.result()
 
 print("Resultados:", result.get_counts())
